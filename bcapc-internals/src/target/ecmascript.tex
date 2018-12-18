@@ -1,0 +1,31 @@
+\zsection1[target.ecmascript]{ECMAScript}
+
+\zsection2[target.ecmascript.translate]{Translation}
+
+Global definitions are translated
+such that they are lazily evaluated.
+This allows for mutually recursive bindings
+as well as non-total bindings.
+Laziness is achieved
+by overwriting the global
+by its value
+on the first use.
+Hence, using a global
+involves calling it
+with no arguments.
+
+Translating \zacronym{ANF}
+into ECMAScript
+proceeds by generating
+an ECMAScript variable declaration
+for every \zacronym{ANF} binding.
+
+\hyperref[name.mangle]{Name mangling} is applied
+to all names
+to ensure no trouble is caused
+by names that resemble ECMAScript keywords
+or violate the lexical rules of ECMAScript.
+
+\zsection2[target.ecmascript.object]{Objects}
+
+\zsection2[target.ecmascript.link]{Linking}

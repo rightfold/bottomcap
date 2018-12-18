@@ -1,0 +1,10 @@
+package std has
+    value PANIC
+        of forall a in bytes -> a
+        is intrinsic panic
+        info "Write the given bytes to stderr and exit the calling process "
+             "with an implementation-defined non-zero exit code. On platforms "
+             "that do not feature these, a suitable substitute is used. It "
+             "should not be possible to run any more code in the same address "
+             "space.";
+end;

@@ -1,0 +1,89 @@
+\zsection1[name.mangle]{Name mangling}
+
+Name mangling ensures
+that two similar names
+that are differently qualified
+end up as different names
+in the translation.
+Name mangling also
+avoids problems
+where targets
+have restrictions
+on what names may be.
+Name mangling
+is uniform
+across targets.
+
+\zsection2[name.mangle.global]{Global names}
+
+The mangling
+of a global name
+is each segment normalized
+and the concatenation
+prefixed with `bcapg'.
+
+\zsection2[name.mangle.local]{Local names}
+
+The mangling
+of a local name
+in identifier form
+is the identifier normalized
+and prefixed with `bcapl'.
+The mangling
+of a compiler-synthesized local name
+is the name in decimal
+prefixed with `bcaps'.
+
+\zsection2[name.mangle.field]{Field names}
+
+The mangling
+of a field name
+is the identifier normalized
+and prefixed with `bcapf'.
+
+\zsection2[name.mangle.normalize]{Normalization}
+
+The purpose of normalization is
+to ensure compatibility
+with different target languages
+that each have their own restrictions
+on what can and cannot be in a name, and
+how names collide with each other.
+Examples of such restrictions
+are case-insensitivity of names
+and demanding that all characters
+are part of \zacronym{ASCII}.
+
+The normalization process
+ensures that a name
+consists only of
+lower-case \zacronym{ASCII} letters
+and \zacronym{ASCII} digits.
+To normalize a name,
+perform the following steps
+one after another:
+
+\begin{enumerate}
+\item
+    Every instance of `z'
+    is prefixed with `z'.
+\item
+    Every code point that is
+    not an \zacronym{ASCII} lowercase letter
+    or an \zacronym{ASCII} uppercase letter
+    or an \zacronym{ASCII} digit
+    is replaced by the eight-digit Unicode scalar value
+    of that code point
+    in lowercase hexadecimal
+    and prefixed with `zs'.
+\item
+    Every code point that is
+    an \zacronym{ASCII} uppercase letter
+    is lowercased
+    and prefixed with `zu'.
+\item
+    Prepend the length
+    of the normalized name so far
+    in decimal
+    followed by `z'.
+\end{enumerate}

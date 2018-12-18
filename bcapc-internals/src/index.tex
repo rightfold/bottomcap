@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\input{src/tex/packages.tex}
+\input{src/tex/macros.tex}
+\input{src/tex/listings.tex}
+
+\renewcommand{\baselinestretch}{1.3}
+\renewcommand{\familydefault}{\sfdefault}
+
+\geometry{margin=1in}
+
+\hypersetup{colorlinks, linkcolor={blue!80!black}}
+
+\title{The bcapc internals manual}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\input{src/overview.tex}
+\input{src/ast.tex}
+\input{src/anf.tex}
+\input{src/name.tex}
+\input{src/target.tex}
+
+\end{document}

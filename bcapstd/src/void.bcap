@@ -1,0 +1,15 @@
+package std has
+    type void
+        of *
+        is variant end
+        info "The void type has no inhabitants. This is useful when you want "
+             "to annotate a particular case as never happening. Note how void "
+             "is different from unit in that unit has one more inhabitant.";
+
+    value absurd
+        of forall a in void -> a
+        is lambda a in match a has end
+        info "The absurd function cannot be called, because its domain is "
+             "void, which has no inhabitants. This is useful when you need a "
+             "term of some type, but you have a term of type void.";
+end;

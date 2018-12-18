@@ -1,0 +1,66 @@
+What is Bottomcap?
+
+A new programming language, with features that make it suitable for large
+software systems, but less suitable for smaller ones. Getting a small program
+to work may be a relatively large amount of work, but this initial setup cost
+pays off when working on a large code base with frequently changing
+requirements. Hence the name Bottomcap.
+
+                                     * * *
+
+What does Bottomcap give you?
+
+ - Type inference makes it easier to write higher-order code without annotating
+   every lambda parameter.
+
+ - Higher-kinded types and higher-rank types allow you to write more
+   abstractions, learn their properties, and avoid duplicating code.
+
+ - Row polymorphism makes for a nice implementation of records, variants, and
+   extensible effects. These work nicely with type inference.
+
+ - Give a function the same argument twice, and it will return the same result.
+   Returning a result is all a function ever does; it does not have
+   side-effects. These guarantees make reasoning about your programs a lot
+   easier, both for programmer and compiler.
+
+ - Functions never throw exceptions, simply because this is not a feature that
+   is, or ever will be, implemented. The only non-total primitive is so
+   brutal that nobody would use it in a library for reporting errors: it
+   immediately terminates the calling process. This means that you can safely
+   use libraries without fearing unexpected exceptions.
+
+ - I/O actions may throw exceptions, but which exceptions they may throw is
+   always annotated in their type. This is similar to I/O actions in the
+   excellent scalaz-zio library.
+
+ - Environment facilities, such as stdout, file system, network, and processes,
+   are not globals. They are passed as arguments to main. This ensures
+   modularity, mockability, and wrappability.
+
+                                     * * *
+
+How did you arrive at these features?
+
+They come from experience writing large software systems and running them in
+production. Some features are obviously essential as it's absolutely impossible
+to maintain any large system without them, namely those that define functional
+programming (determinism and purity). The lack of exceptions comes from
+frustration with Haskell libraries that use them. It's annoying and there is
+absolutely no good reason for them to exist.
+
+In short, the features come from these sources:
+
+ - Functional programming: Haskell and PureScript.
+ - Higher-kinded types and higher-rank types: Haskell and PureScript.
+ - Row polymorphism: PureScript.
+ - No exceptions: frustration with Haskell. Also, almost nobody uses them in
+   PureScript and it seems to work out just fine.
+ - Bifunctor I/O: scalaz-zio.
+ - Arguments to main: frustration with every other language ever.
+
+Minor features were inspired from other languages:
+
+ - Syntax: C# and VHDL.
+ - Compilation model: Rust.
+ - Namespaces: PHP.

@@ -1,0 +1,45 @@
+\zsection0[name]{Names}
+
+\zsection1[name.package]{Packages}
+
+Packages disambiguate similar names
+by grouping definitions.
+Inside a package definition,
+only globals defined
+inside the same package
+and names that are imported
+are in scope.
+
+\zsection1[name.global]{Global names}
+
+Global names
+are names
+of package-level definitions.
+A global name
+consists of
+a package name
+and an identifier.
+
+\zsection1[name.local]{Local names}
+
+Local names
+are names
+of bound variables.
+A local name
+is either an identifier
+or compiler-synthesized.
+A local names that comes
+directly from a source program
+is an identifier.
+
+\zsection1[name.field]{Field names}
+
+Field names
+are used
+for record fields
+and as variant discriminators.
+A field name
+consists of
+an identifier.
+
+\input{src/name/mangling.tex}

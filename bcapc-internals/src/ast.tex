@@ -1,0 +1,70 @@
+\zsection0[ast]{Abstract syntax tree}
+
+The abstract syntax tree
+is a tree structure
+suitable for
+further processing.
+It is produced
+from the source text
+in a process called parsing.
+In the \zacronym{AST},
+expressions may be nested
+arbitrarily.
+See figure \ref{ast.example}
+for an example program
+and its corresponding \zacronym{AST}.
+
+\tikzstyle{znode}=[draw, fill=white, rounded rectangle]
+
+\begin{zfigure}[sidebyside]{
+    Example source text (left)
+    and equivalent \zacronym{AST} (right).
+}
+    \label{ast.example}
+
+    \begin{lstlisting}[language=Bottomcap]
+f (g x)
+  (lambda y in h y)
+    \end{lstlisting}
+
+    \tcblower
+
+    \begin{center}
+        \begin{tikzpicture}[
+            every node/.style={znode},
+            level distance=0.5in,
+            level 1/.style={sibling distance=1.5in},
+            level 2/.style={sibling distance=1.0in},
+            level 3/.style={sibling distance=0.5in}
+        ]
+            \node { \strut }
+                child {
+                    node { \strut }
+                    child { node { \strut f } }
+                    child {
+                        node { \strut }
+                        child { node { \strut g } }
+                        child { node { \strut x } }
+                    }
+                }
+                child {
+                    node { \strut lambda y }
+                    child {
+                        node { \strut }
+                        child { node { \strut h } }
+                        child { node { \strut y } }
+                    }
+                } ;
+        \end{tikzpicture}
+    \end{center}
+\end{zfigure}
+
+The \zacronym{AST}
+does not preserve information such as
+whitespace,
+punctuation,
+and redundant keywords.
+Syntactic sugar
+remains, however.
+It is not eliminated
+until \hyperref[anf.lower]{lowering}.

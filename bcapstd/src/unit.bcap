@@ -1,0 +1,14 @@
+package std has
+    type unit
+        of *
+        is record end
+        info "The unit type has one inhabitant. This is useful when an action "
+             "in some context contains no information: only the context is"
+             "important. Note how unit is different from void in that void "
+             "has one fewer inhabitant.";
+
+    value unit
+        of unit
+        is record end
+        info "The unit value is the sole value of the unit type."
+end;

@@ -1,0 +1,61 @@
+\zsection0[anf]{Administrative normal form}
+
+The adminstrative normal form
+is suitable for optimization
+and code generation.
+It is a simplified form
+in which only variables
+and constants
+occur within other expressions,
+and everything else
+is bound via bindings.
+See figure \ref{anf.example.bcap}
+for a comparison
+between an \zacronym{AST}
+and the equivalent \zacronym{ANF}.
+
+\begin{zfigure}[sidebyside]{
+    Example \zacronym{AST} (left)
+    and equivalent \zacronym{ANF} (right).
+}
+    \label{anf.example.bcap}
+
+    \begin{lstlisting}[language=Bottomcap]
+f (g x)
+  (lambda y in h y)
+    \end{lstlisting}
+
+    \tcblower
+
+    \begin{lstlisting}[language=Bottomcap, mathescape=true]
+let A is g x in
+let B is lambda C in
+    let D is h C
+    in D in
+let E is f A in
+let F is E B in
+E
+    \end{lstlisting}
+\end{zfigure}
+
+\zsection1[anf.lower]{Lowering}
+
+The translation
+from \zacronym{AST}
+to \zacronym{ANF}
+happens through
+the \zacronym{ANF} construction \zacronym{EDSL}.
+This process is called lowering.
+Lowering proceeds
+by traversing the \zacronym{AST}
+bottom-up.
+During the traversal
+a symbol table is kept,
+mapping identifiers to symbols.
+A symbol is either
+a package name,
+a global name,
+or a local name.
+When a variable expression is traversed,
+the corresponding symbol is looked up
+and appropriate \zacronym{ANF} is generated.

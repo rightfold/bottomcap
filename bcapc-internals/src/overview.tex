@@ -1,0 +1,55 @@
+\zsection0[overview]{Overview}
+
+bcapc reads
+a translation unit
+and turns it
+into an object.
+A translation unit
+is an amount of source text%
+---possibly from multiple source files---%
+that is translated
+into a target language.
+Cyclic references
+between package-level definitions
+may exist within a translation unit,
+but not between translation units.
+
+After compilation,
+objects must be linked
+to form an executable.
+Linking happens
+as a separate invocation
+of bcapc,
+because it involves
+multiple translation units.
+
+Compiling a program with bcapc
+is a multi-stage process.
+See figure \ref{overview.diagram}
+for an overview
+of the stages
+and how they are connected.
+
+\tikzstyle{zstage}=[draw, fill=white, minimum width=0.75in, minimum height=0.5in]
+\tikzstyle{zfinal}=[zstage, dashed]
+\tikzstyle{znext}=[draw, ->]
+\tikzstyle{zuses}=[draw, dashed]
+
+\begin{zfigure}{The bcapc compilation stages.}
+    \label{overview.diagram}
+    \begin{center}
+        \vspace{4pt}
+        \begin{tikzpicture}[node distance=0.25in and 0.75in]
+            \node [zstage]                 (parse) { \strut parse }                       ;
+            \node [zstage, right=of parse] (lower) { \strut \hyperref[anf.lower]{lower} } ;
+            \node [zstage, below=of lower] (check) { \strut check }                       ;
+            \node [zstage, right=of lower] (trans) { \strut translate }                   ;
+            \node [zfinal, right=of trans] (link)  { \strut link }                        ;
+
+            \path [znext] (parse) -- node [above] { \strut \zacronym{AST} } (lower) ;
+            \path [zuses] (lower) --                                        (check) ;
+            \path [znext] (lower) -- node [above] { \strut \zacronym{ANF} } (trans) ;
+            \path [znext] (trans) -- node [above] { \strut object         } (link)  ;
+        \end{tikzpicture}
+    \end{center}
+\end{zfigure}

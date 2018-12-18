@@ -1,0 +1,19 @@
+\def\zsection#1[#2]#3{%
+\ifcase#1\let\zs=\section%
+      \or\let\zs=\subsection%
+      \or\let\zs=\subsubsection\fi%
+\zs[#3]{#3\hfill\small{\textnormal{\fbox{\strut#2}}}}%
+\label{#2}%
+}
+
+\def\zacronym#1{%
+\textsc{\MakeLowercase{#1}}%
+}
+
+\newtcolorbox[blend into=figures]{zfigure}[2][]{
+    title=#2,
+    #1,
+    enhanced,
+    colback=blue!10,
+    colframe=blue!50!black
+}
